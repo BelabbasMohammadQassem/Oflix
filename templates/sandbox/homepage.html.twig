@@ -1,13 +1,54 @@
 {# ce template hérite du template base.html.twig #}
 {% extends 'base.html.twig' %}
 
+{% block title %}
+    Salut les nems ! 
+{% endblock %}
+
 {# on redéfinit le contenu du block body du fichier base.html.twig #}
 {% block body %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+
 <h1> Hello j'hérite d'un template </h1>
+
+    Bonjour {{ toto.name }}
+    <hr>
+    {% if age >= 18 %}
+        Vous etes majeur
+    {% else %}
+        Vous etes mineur
+    {% endif %}
+    <hr>
+    {% if majeur %}
+        Voila du champage
+    {% else %}
+        Voila du champomy
+    {% endif %}
+    <hr>
+    <ul>
+        {% for ingredient in liste_course %}
+            <li>{{ ingredient }}</li>
+        {% endfor %}
+        <li>ne surtout pas oublié {{ liste_course[1] }}</li>
+    </ul>
+    <hr>
+    {{ xss_css }}
+    {{ xss_js }}
+
+    <hr>
+    <p> {{ "bonjour " ~ greg.name }}</p>
+    Vos hobbies
+    <ul>
+        {% for hobby in greg.hobbies %}
+        <li> {{ hobby }}</li>
+        {%endfor%}
+    </ul>
 {% endblock %}
-
-
-{% block title %}
-Salut les nems ! 
-{% endblock %}
-
