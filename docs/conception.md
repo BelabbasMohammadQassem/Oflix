@@ -3,25 +3,25 @@
 ## MCD
 
 ```raw
-:
-:
-Actor: actor code, actor name
-:
-
-:
-:
-is played by, 1N Show, 0N Actor: character name
+has type, 11 Show, 0N Type
+produced in, 1N Show, 0N Country
 Country: country name
+:
 
 Type: type name
-has type, 11 Show, 0N Type
 Show: show code, title, release_year, poster, duration, summary, synopsis, rating 
-produced in, 1N Show, 0N Country
-
-:
-:
 has genre, 1N Show, 0N Genre
 Genre: genre name
+
+:
+has seasons, 0N Show, 11 Season 
+is played by, 1N Show, 0N Actor: character name
+:
+
+:
+Season: number, episode count
+Actor: actor code, actor name
+:
 ```
 
 ## MLD
@@ -100,6 +100,13 @@ CREATE TABLE `show_genre` (
   `genre_id` int unsigned NOT NULL
 );
 
+CREATE TABLE `season` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `number` int unsigned NOT NULL,
+  `episode_count` int unsigned NOT NULL,
+  `show_id` int unsigned NOT NULL
+)
+
 ALTER TABLE `show` ADD FOREIGN KEY (`type_id`) REFERENCES `type` (`id`);
 ALTER TABLE `show_actor` ADD FOREIGN KEY (`show_id`) REFERENCES `show` (`id`);
 ALTER TABLE `show_actor` ADD FOREIGN KEY (`actor_id`) REFERENCES `actor` (`id`);
@@ -109,6 +116,8 @@ ALTER TABLE `show_country` ADD FOREIGN KEY (`country_id`) REFERENCES `country` (
 
 ALTER TABLE `show_genre` ADD FOREIGN KEY (`show_id`) REFERENCES `show` (`id`);
 ALTER TABLE `show_genre` ADD FOREIGN KEY (`genre_id`) REFERENCES `genre` (`id`);
+
+ALTER TABLE `season` ADD FOREIGN KEY (`show_id`) REFERENCES `show` (`id`);
 
 
 INSERT INTO `actor` (`name`) VALUES ('Keanu Reeves');
@@ -138,10 +147,10 @@ INSERT INTO `country` (`name`) VALUES ('Thaïlande');
 INSERT INTO `type` (`name`) VALUES ('Film');
 INSERT INTO `type` (`name`) VALUES ('Série');
 
-INSERT INTO `show` (`title`, `release_year`, `poster`, `duration`, `summary`, `synopsis`, `rating`, `type_id`) VALUES 
+INSERT INTO `show` (`title`, `released_at`, `poster`, `duration`, `summary`, `synopsis`, `rating`, `type_id`) VALUES 
 ('1001 pates', '2000-01-01', 'https://picsum.photos/200/300', 200, 'Krung Thep Mahanakhon Amon', 'Krung Thep Mahanakhon Amon Rattanakosin Mahinthara Ayuthaya Mahadilok Phop Noppharat Ratchathani Burirom Udomratchaniwet Mahasathan Amon Piman Awatan Sathit Sakkathattiya Witsanukam Prasit', 3, 1),
  ('Matrix', '1999-03-31', 'https://m.media-amazon.com/images/I/71x7df0yZdL._AC_UF1000,1000_QL80_.jpg', 136, 'A computer hacker learns about the true nature of his reality.', 'In a dystopian future, humanity is unknowingly trapped inside a simulated reality.', 5, 1),
-  ('Matrix - la série', '2009-03-31', 'https://m.media-amazon.com/images/I/71x7df0yZdL._AC_UF1000,1000_QL80_.jpg', 136, 'A computer hacker learns about the true nature of his reality.', 'In a dystopian future, humanity is unknowingly trapped inside a simulated reality.', 4.5, 2)
+  ('Matrix - la série', '2009-03-31', 'https://m.media-amazon.com/images/I/71x7df0yZdL._AC_UF1000,1000_QL80_.jpg', 136, 'A computer hacker learns about the true nature of his reality.', 'In a dystopian future, humanity is unknowingly trapped inside a simulated reality.', 4.5, 2);
 ;
 
 INSERT INTO `show_actor` (`show_id`, `actor_id`, `character_name`) VALUES (2, 1, 'Néo');

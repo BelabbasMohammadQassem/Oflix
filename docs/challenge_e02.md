@@ -7,3 +7,4 @@ Suivez les instructions du README.md
 ## Bonus
 
 Dynamiser les pages avec le contenu de data.php
+

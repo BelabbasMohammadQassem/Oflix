@@ -2,18 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\ActorRepository;
+use App\Repository\CountryRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ActorRepository::class)]
-class Actor
+#[ORM\Entity(repositoryClass: CountryRepository::class)]
+class Country
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100, nullable:true)]
+    #[ORM\Column(length: 200)]
     private ?string $name = null;
 
     public function getId(): ?int

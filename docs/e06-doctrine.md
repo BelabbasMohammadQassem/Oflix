@@ -31,7 +31,6 @@ bin/console doctrine:database:create
 - relire la migration
 - appliquer la migration en BDD : `bin/console doctrine:migrations:migrate`
 
-
 ## HELP
 
 Impossible d'accéder à MariaDB depuis le conteneur
@@ -44,4 +43,17 @@ sudo systemctl stop apache2
 # - ports
 # on peut accéder à http://localhost 
 # /!\ à refaire au redémarrage de la machine
+```
+
+## Kill Docker RIP
+
+```bash
+# arreter les containers
+docker compose down
+# redémarrer apache
+sudo systemctl restart apache2
+# modifier composer.json
+# remplacer 6.4.* par 7.*
+sudo chown -R student:www-data .
+composer update
 ```

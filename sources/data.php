@@ -2,7 +2,7 @@
 
 $shows = [
 
-    [
+    1 => [
         'type' => 'Film',
         'title' => 'A Bug\'s Life',
         'release_date' => 1998,

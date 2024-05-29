@@ -32,3 +32,5 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Et pour finir on permet à Apache de lire les fichiers .htaccess et on active la réecriture d'URL
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride all/' /etc/apache2/apache2.conf
 RUN a2enmod rewrite
+
+RUN sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf

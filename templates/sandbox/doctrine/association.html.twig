@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<ul>
+    {% for currentType in typeList %}
+    <li>
+        {{ currentType.id }} - {{ currentType.funckyName }}
+        <ol>
+            {% for currentShow in currentType.shows %}
+            <li>{{ currentShow.title }} ({{ currentShow.id }}) </li>
+            {% endfor %}
+        </ol>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

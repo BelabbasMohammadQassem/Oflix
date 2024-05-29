@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<ul>
+    {% for currentGenre in genreList %}
+    <li>{{ currentGenre.id }} - {{ currentGenre.name }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
