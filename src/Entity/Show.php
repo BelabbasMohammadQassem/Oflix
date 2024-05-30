@@ -48,9 +48,23 @@ class Show
     #[ORM\OneToMany(targetEntity: Season::class, mappedBy: 'tvShow')]
     private Collection $seasons;
 
+    /**
+     * @var Collection<int, Country>
+     */
+    #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'shows')]
+    private Collection $countries;
+
+    /**
+     * @var Collection<int, Genre>
+     */
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'shows')]
+    private Collection $genres;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
+        $this->countries = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -180,6 +194,54 @@ class Show
                 $season->setTvShow(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Country>
+     */
+    public function getCountries(): Collection
+    {
+        return $this->countries;
+    }
+
+    public function addCountry(Country $country): static
+    {
+        if (!$this->countries->contains($country)) {
+            $this->countries->add($country);
+        }
+
+        return $this;
+    }
+
+    public function removeCountry(Country $country): static
+    {
+        $this->countries->removeElement($country);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Genre>
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(Genre $genre): static
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres->add($genre);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): static
+    {
+        $this->genres->removeElement($genre);
 
         return $this;
     }

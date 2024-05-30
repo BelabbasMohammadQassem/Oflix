@@ -238,19 +238,57 @@ class SandboxController extends AbstractController
     #[Route('/populateDatabase', methods: "GET", name:"session_populate_database")]
     public function populateDatabase(EntityManagerInterface $em)
     {
+
+        /***** COUNTRY ******/
         $countryList = [
             'France',
             'USA',
             'Canada',
+            'Italie',
+            'Espagne',
+            'Portugal',
+            'Brésil',
+            'Bénin',
         ];
 
+        $countryEntityList = [];
         foreach( $countryList as $currentCountry)
         {
-            $country = new Country();
-            $country->setName($currentCountry);
-            $em->persist($country);
+            $newCountry = new Country();
+            $newCountry->setName($currentCountry);
+            $countryEntityList[] = $newCountry;
+            $em->persist($newCountry);
         }
 
+        /******** GENRE ********/
+        $genreList = [
+            'Action', 
+            'Animation', 
+            'Aventure', 
+            'Comédie', 
+            'Dessin animé', 
+            'Documentaire', 
+            'Drame', 
+            'Espionnage', 
+            'Famille', 
+            'Fantastique', 
+            'Historique', 
+            'Policier', 
+            'Romance', 
+            'Science-fiction', 
+            'Thriller', 
+            'Western', 
+        ];
+
+        $genreEntityList = [];
+        foreach( $genreList as $currentGenre)
+        {
+            $newGenre = new Genre();
+            $newGenre->setName($currentGenre);
+            $genreEntityList[] = $newGenre;
+            $em->persist($newGenre);
+        }
+        /******* TYPES ********/
         // creation de types
         $typeTvShow = new Type();
         $typeTvShow->setName('Série');
@@ -260,6 +298,7 @@ class SandboxController extends AbstractController
         $typeMovie->setName('Film');
         $em->persist($typeMovie);
 
+        /********* SHOW *******/
         $showList = [
             [
                 'title' => 'Matrix',
@@ -427,7 +466,22 @@ class SandboxController extends AbstractController
             $show->setSummary($currentShowInfo['summary']);
             $show->setSynopsis($currentShowInfo['synopsis']);
             $show->setRating($currentShowInfo['rating']);
-            $type = 'Film';
+            
+            $countryCount = random_int(1, count($countryEntityList));
+            for ($countryIndex = 0; $countryIndex < $countryCount; $countryIndex++)
+            {
+                // sélectionne une country au hasard
+                $countryToAdd = $countryEntityList[random_int(0, count($countryEntityList) - 1)];
+                $show->addCountry($countryToAdd);
+            }
+
+            $genreCount = random_int(1, count($genreEntityList));
+            for ($genreIndex = 0; $genreIndex < $genreCount; $genreIndex++)
+            {
+                // sélectionne une genre au hasard
+                $genreToAdd = $genreEntityList[random_int(0, count($genreEntityList) - 1)];
+                $show->addGenre($genreToAdd);
+            }
 
             if (isset($currentShowInfo['type']))
             {

@@ -16,6 +16,27 @@ class ShowRepository extends ServiceEntityRepository
         parent::__construct($registry, Show::class);
     }
 
+    /**
+    * @return Show[] Returns an array of Show objects
+    */
+    public function findAllWithAssociation(): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT s, t, g, c
+            FROM App\Entity\Show s
+            JOIN s.type t
+            JOIN s.genres g
+            JOIN s.countries c
+            WHERE s.rating > :rating'
+        );
+        $query->setParameter('rating', 3);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
     //    /**
     //     * @return Show[] Returns an array of Show objects
     //     */

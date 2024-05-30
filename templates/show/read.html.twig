@@ -22,14 +22,13 @@
 
                     <div class="col-8 p-4 d-flex flex-column position-static bg-light">
                         <a href="" class="movie__favorite fs-1 my-2 mx-3 link-danger"><i class="bi bi-bookmark-plus"></i></a>
-                        <strong class="d-inline-block mb-2 text-primary">{{ show.type }}</strong>
+                        <strong class="d-inline-block mb-2 text-primary">{{ show.type.name }}</strong>
                         <h3 class="mb-1">{{ show.title }}</h3>
                         <div class="mb-1 text-muted">{{ show.duration }} min</div>
                         <p>
-                            <span class="badge bg-warning text-dark">Animation</span>
-                            <span class="badge bg-warning text-dark">Aventure</span>
-                            <span class="badge bg-warning text-dark">Comédie</span>
-                            <span class="badge bg-warning text-dark">Famille</span>
+                            {% for currentGenre in show.genres %}
+                            <span class="badge bg-warning text-dark">{{ currentGenre.name }}</span>
+                            {% endfor %}
                         </p>
                         <p>{{ show.synopsis }}
                         </p>
@@ -59,9 +58,11 @@
                                 Acteur 3 (Franz)<br>
                             </dd>
                             <dt class="col-sm-12">Pays</dt>
-                            <dd class="col-sm-12">USA</dd>
+                            {% for currentCountry in show.countries %}
+                            <dd class="col-sm-12">{{ currentCountry.name }}</dd>
+                            {% endfor %}
                             <dt class="col-sm-12">Année</dt>
-                            <dd class="col-sm-12">{{ show.release_date }}</dd>
+                            <dd class="col-sm-12">{{ show.releasedAt.format('d/m/Y') }}</dd>
                         </dl>
 
                     </div>
