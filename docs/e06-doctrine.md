@@ -33,7 +33,14 @@ bin/console doctrine:database:create
 
 ## HELP
 
-Impossible d'accéder à MariaDB depuis le conteneur
+### table ou colonne inconnue par doctrine
+
+Si doctrine ne trouve une table ou une colonne dans la BDD, il faut vérifier le trio Entité / Migration / BDD
+
+1. vérifier que la requete SQL de modification a bien été généré dans une migration
+2. vérifier que la migration a bien été appliqué ( vérifier si le nom de la classe apparait dans la table `doctrine_migration_versions` )
+
+### Impossible d'accéder à MariaDB depuis le conteneur
 
 ```bash
 # desactivation de apache en local

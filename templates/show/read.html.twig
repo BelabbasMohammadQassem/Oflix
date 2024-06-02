@@ -53,9 +53,9 @@
                         <dl class="row">
                             <dt class="col-sm-12">Avec</dt>
                             <dd class="col-sm-12">
-                                Acteur 1 (Tilt)<br>
-                                Acteur 2 (La reine)<br>
-                                Acteur 3 (Franz)<br>
+                                {% for currentCasting in show.castings %}
+                                {{ currentCasting.actor.firstName }} {{ currentCasting.actor.lastName}} ({{ currentCasting.role }})<br>
+                                {% endfor %}
                             </dd>
                             <dt class="col-sm-12">Pays</dt>
                             {% for currentCountry in show.countries %}
@@ -64,7 +64,6 @@
                             <dt class="col-sm-12">Année</dt>
                             <dd class="col-sm-12">{{ show.releasedAt.format('d/m/Y') }}</dd>
                         </dl>
-
                     </div>
                 </div>
 

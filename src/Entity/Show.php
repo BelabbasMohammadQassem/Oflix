@@ -60,11 +60,18 @@ class Show
     #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'shows')]
     private Collection $genres;
 
+    /**
+     * @var Collection<int, Casting>
+     */
+    #[ORM\OneToMany(targetEntity: Casting::class, mappedBy: 'artWork')]
+    private Collection $castings;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
         $this->countries = new ArrayCollection();
         $this->genres = new ArrayCollection();
+        $this->castings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -242,6 +249,36 @@ class Show
     public function removeGenre(Genre $genre): static
     {
         $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Casting>
+     */
+    public function getCastings(): Collection
+    {
+        return $this->castings;
+    }
+
+    public function addCasting(Casting $casting): static
+    {
+        if (!$this->castings->contains($casting)) {
+            $this->castings->add($casting);
+            $casting->setArtWork($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCasting(Casting $casting): static
+    {
+        if ($this->castings->removeElement($casting)) {
+            // set the owning side to null (unless already changed)
+            if ($casting->getArtWork() === $this) {
+                $casting->setArtWork(null);
+            }
+        }
 
         return $this;
     }
