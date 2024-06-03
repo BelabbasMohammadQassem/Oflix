@@ -66,12 +66,19 @@ class Show
     #[ORM\OneToMany(targetEntity: Casting::class, mappedBy: 'artWork')]
     private Collection $castings;
 
+    /**
+     * @var Collection<int, Review>
+     */
+    #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'artWork')]
+    private Collection $reviews;
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
         $this->countries = new ArrayCollection();
         $this->genres = new ArrayCollection();
         $this->castings = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -153,6 +160,9 @@ class Show
 
     public function getRating(): ?float
     {
+        // récupérer la liste de toutes les reviews, 
+        // calculer la moyenne et envoyer la note calculée
+
         return $this->rating;
     }
 
@@ -277,6 +287,36 @@ class Show
             // set the owning side to null (unless already changed)
             if ($casting->getArtWork() === $this) {
                 $casting->setArtWork(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Review>
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
+
+    public function addReview(Review $review): static
+    {
+        if (!$this->reviews->contains($review)) {
+            $this->reviews->add($review);
+            $review->setArtWork($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReview(Review $review): static
+    {
+        if ($this->reviews->removeElement($review)) {
+            // set the owning side to null (unless already changed)
+            if ($review->getArtWork() === $this) {
+                $review->setArtWork(null);
             }
         }
 

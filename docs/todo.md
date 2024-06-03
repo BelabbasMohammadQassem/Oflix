@@ -14,6 +14,7 @@
 - dans les routes, mettre l'url `/film/slug` pour un film ou `/serie/slug` pour une serie
 - Terminer le TimeConverter ( gérer l'affichage des semaines, gérer les demi minutes)
 - Trouver le moyen de classer automatiquement les acteurs par ordre de creditOrder.
+- Calculer le rating en fonction des Review ( on peut si on le souhaite supprimer le champ en BDD, mais le garder dans l'entité)
 
 ## Done
 

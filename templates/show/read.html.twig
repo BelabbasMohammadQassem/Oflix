@@ -66,11 +66,21 @@
                         </dl>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
+        <div class="row mb-2">
+            <div class="p-4 d-flex flex-column position-static bg-light">
+                <h3 class="mb-1">Commentaires</h3>
+                <a href="{{ path('app_show_review_add', {id: show.id}) }}" class="btn btn-primary">Commenter à mon tour</a>
+                {% for currentReview in show.reviews %}
+                <figure class="border p-2 mt-2">
+                    <figcaption>Par {{ currentReview.userName }}</figcaption>
+                    <p>{{ currentReview.content }}</p>
+                </figure>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}

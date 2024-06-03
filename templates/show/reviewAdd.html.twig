@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commenter le film film NOM_DU_FILM todo {% endblock %}
+
+{% block body %}
+
+
+<div class="container bg-lighttt pt-5">
+    <div class="row mb-2">
+        <div class="col">
+            {{ form_start(form, {"attr": {"novalidate":"novalidate"}}) }}
+                {{ form_row(form.username) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.content) }}
+                {{ form_row(form.rating) }}
+                {{ form_row(form.reactions) }}
+                {{ form_row(form.watchedAt) }}
+                <button class="btn btn-primary">C'est mon dernier mot, je valide !</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
