@@ -26,6 +26,7 @@ class MovieType extends AbstractType
                 'class' => Genre::class,
                 'choice_label' => 'id',
                 'multiple' => true,
+                'expanded' => true,
             ])
             ->add('people', EntityType::class, [
                 'class' => Person::class,
