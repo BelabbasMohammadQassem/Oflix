@@ -27,7 +27,7 @@ class MainController extends AbstractController
          require __DIR__ . '/../../sources/data.php';
 
          // 2. appel la vue
-         return $this->render('main/homeoffice.html.twig', [
+         return $this->render('back/main/homeoffice.html.twig', [
              'showList' => $shows
          ]);
     }
