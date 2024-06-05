@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un show{% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+
+        <h1>Ajouter un show</h1>
+
+        {{ form_start(form, {"attr": {"novalidate" : "novalidate"}}) }}
+        {{ form_row(form) }}
+        <button class="btn btn-primary">Créer le show</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

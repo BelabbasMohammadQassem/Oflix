@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le show {{ show.title }} {% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+
+        <h1>{{ show.title }}</h1>
+
+        {{ form_start(form, {"attr": {"novalidate" : "novalidate"}}) }}
+        {{ form_row(form) }}
+        <button class="btn btn-primary">Modifier</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

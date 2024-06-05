@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des shows{% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+
+        <h1>Dashboard</h1>
+
+        <a href="{{ path('app_back_show_add') }}" class="btn btn-primary">Ajouter</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Durée</th>
+                    <th>Synopsis</th>
+                    <th>Image</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for currentShow in showList %}
+                    <tr>
+                        <td>{{ currentShow.id }}</td>
+                        <td>{{ currentShow.title }}</td>
+                        <td>{{ currentShow.duration }}</td>
+                        <td>{{ currentShow.synopsis }}</td>
+                        <td>{{ currentShow.poster ? "✅" : "❌" }}</td>
+                        <td>
+                            <a href="{{ path('app_back_show_read', {id: currentShow.id })}}" class="btn btn-secondary">Détails</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

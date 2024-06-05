@@ -15,21 +15,10 @@ class MainController extends AbstractController
         // 1. préparation des données
         require __DIR__ . '/../../sources/data.php';
 
+
         // 2. appel la vue
         return $this->render('main/home.html.twig', [
             'showList' => $shows
         ]);
     }
-
-    #[Route('/back', "app_main_homeoffice", methods: "GET")]
-    public function homeoffice(): Response {
-         // 1. préparation des données
-         require __DIR__ . '/../../sources/data.php';
-
-         // 2. appel la vue
-         return $this->render('back/main/homeoffice.html.twig', [
-             'showList' => $shows
-         ]);
-    }
-    
 }

@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visualiser le show {{ show.title }} {% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+
+        <h1>{{ show.title }}</h1>
+        <a href="{{ path('app_back_show_edit', {id: show.id}) }}" class="btn btn-secondary">Modifier</a>
+        <a href="{{ path('app_back_show_delete', {id: show.id}) }}" class="btn btn-danger">Supprimer</a>
+        <a href="" class="btn btn-secondary">Gérer les castings</a>
+        <a href="" class="btn btn-secondary">Gérer les saisons</a>
+
+        <table class="table">
+            <tbody>
+                <tr><th>Id</th><td>{{ show.id }}</td></tr>
+                <tr><th>Type</th><td>{{ show.type.name }}</td></tr>
+                <tr><th>Titre</th><td>{{ show.title }}</td></tr>
+                <tr><th>Durée</th><td>{{ show.duration }}</td></tr>
+                <tr><th>Synopsis</th><td>{{ show.synopsis }}</td></tr>
+                <tr><th>Résumé</th><td>{{ show.summary }}</td></tr>
+                <tr><th>Image</th><td>{{ show.poster }}</td></tr>
+                <tr><th>Note</th><td>{{ show.rating }}</td></tr>
+                {% if show.type.name == "Série" %}
+                <tr>
+                    <th>Saisons</th>
+                    <td>
+                        <ul>
+                        {% for currentSeason in show.seasons %}
+                            <li>Saison {{ currentSeason.number }} ( {{ currentSeason.episodeCount }} épisodes )</li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% endif %}
+                <tr>
+                    <th>Genres</th>
+                    <td>
+                    {% for currentGenre in show.genres %}
+                        <span class="badge bg-warning text-dark">{{ currentGenre.name }}</span>
+                    {% endfor %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Pays</th>
+                    <td>
+                    {{ show.countries|join(', ') }}
+                    </td>
+                </tr>
+            <tbody>
+        </table>
+
+    </div>
+
+{% endblock %}
