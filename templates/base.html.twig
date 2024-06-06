@@ -20,6 +20,7 @@
 </head>
 
 <body>
+    {# si le nom de la route actuelle commence par app_back alors on affiche la nav du back #}
     {% if app.current_route|slice(0,8) == "app_back"%}
         {% include '_partials/nav-back.html.twig' %}
     {% else %}

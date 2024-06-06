@@ -2,24 +2,31 @@
 
 ## MCD
 
-```raw
+```raw:
+:
+Genre: genre name
+Season: number, episode count
+Type: type name
+:
+
+:
+:
+has genre, 1N Show, 0N Genre
+has seasons, 0N Show, 11 Season 
 has type, 11 Show, 0N Type
+:
+
+:
+Review: review code, content, rating, reactions, watched at
+reviewed, 0N Show, 11 Review
+Show: show code, title, release_year, poster, duration, summary, synopsis, rating 
 produced in, 1N Show, 0N Country
 Country: country name
-:
 
-Type: type name
-Show: show code, title, release_year, poster, duration, summary, synopsis, rating 
-has genre, 1N Show, 0N Genre
-Genre: genre name
-
+User: email, pseudo, password, roles
+write, 0N User, 11 Review
 :
-has seasons, 0N Show, 11 Season 
 is played by, 1N Show, 0N Actor: character name
-:
-
-:
-Season: number, episode count
 Actor: actor code, actor name
 :
 ```

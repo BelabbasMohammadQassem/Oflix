@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des countries{% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+
+        <h1>Dashboard</h1>
+
+        <a href="{{ path('app_back_country_add') }}" class="btn btn-primary">Ajouter</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Pays</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for currentCountry in countryList %}
+                    <tr>
+                        <td>{{ currentCountry.id }}</td>
+                        <td>{{ currentCountry.name }}</td>
+                        <td>
+                            <a href="{{ path('app_back_country_read', {id: currentCountry.id })}}" class="btn btn-secondary">Détails</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

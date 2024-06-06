@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container-xl bg-light p-5 border-top">
+        <a href="{{ path('app_back_show_browse') }}" class="btn btn-primary">Retour à la liste</a>
 
         <h1>{{ show.title }}</h1>
         <a href="{{ path('app_back_show_edit', {id: show.id}) }}" class="btn btn-secondary">Modifier</a>

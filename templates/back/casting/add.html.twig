@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un casting pour le film {{ show.title }}{% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+
+        <a href="{{ path('app_back_casting_browse', {showId: show.id}) }}" class="btn btn-primary">Retour à la liste</a>
+        <h1>Ajouter un casting</h1>
+
+        {{ form_start(form, {"attr": {"novalidate" : "novalidate"}}) }}
+        {{ form_row(form) }}
+        <button class="btn btn-primary">Créer le casting</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}

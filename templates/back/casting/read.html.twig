@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Visualiser le casting {{ casting.role }} {% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+        <a href="{{ path('app_back_casting_browse', {showId : casting.artWork.id }) }}" class="btn btn-primary">Retour à la liste</a>
+
+        <h1>{{ casting.artWork.title }} - {{ casting.role }}</h1>
+        <a href="{{ path('app_back_casting_edit', {id: casting.id}) }}" class="btn btn-secondary">Modifier</a>
+        <a href="{{ path('app_back_casting_delete', {id: casting.id}) }}" class="btn btn-danger">Supprimer</a>
+
+        <table class="table">
+            <tbody>
+                <tr><th>Id</th><td>{{ casting.id }}</td></tr>
+                <tr><th>Ordre</th><td>{{ casting.creditOrder }}</td></tr>
+                <tr><th>Rôle</th><td>{{ casting.role }}</td></tr>
+                <tr><th>Acteur</th><td>{{ casting.actor.displayName }}</td></tr>
+            <tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

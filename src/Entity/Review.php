@@ -24,15 +24,6 @@ class Review
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    #[Assert\NotBlank]
-    private ?string $username = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    #[Assert\Email]
-    private ?string $email = null;
-
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\NotBlank]
     #[Assert\Length(min:10)]
@@ -52,33 +43,13 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private ?Show $artWork = null;
 
+    #[ORM\ManyToOne(inversedBy: 'reviews')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): static
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): static
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     public function getContent(): ?string
@@ -137,6 +108,23 @@ class Review
     public function setArtWork(?Show $artWork): static
     {
         $this->artWork = $artWork;
+
+        return $this;
+    }
+
+    public function getUserName()
+    {
+        return $this->user->getPseudo();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

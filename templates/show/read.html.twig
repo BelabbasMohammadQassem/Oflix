@@ -77,6 +77,10 @@
                 <figure class="border p-2 mt-2">
                     <figcaption>Par {{ currentReview.userName }}</figcaption>
                     <p>{{ currentReview.content }}</p>
+                    {# {% if is_granted('ROLE_ADMIN') or (currentReview.user == app.user) %} #}
+                    {% if is_granted('REVIEW_EDIT', currentReview) %}
+                    <a class="btn btn-secondary" href="{{ path('app_show_review_edit', {id: currentReview.id}) }}">Modifier</a>
+                    {% endif %}
                 </figure>
                 {% endfor %}
             </div>

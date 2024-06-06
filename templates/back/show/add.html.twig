@@ -5,6 +5,7 @@
 {% block body %}
     <div class="container-xl bg-light p-5 border-top">
 
+        <a href="{{ path('app_back_show_browse') }}" class="btn btn-primary">Retour à la liste</a>
         <h1>Ajouter un show</h1>
 
         {{ form_start(form, {"attr": {"novalidate" : "novalidate"}}) }}

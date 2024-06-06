@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier le show {{ show.title }} {% endblock %}
+{% block title %}Créer une country{% endblock %}
 
 {% block body %}
     <div class="container-xl bg-light p-5 border-top">
 
-        <a href="{{ path('app_back_show_browse') }}" class="btn btn-primary">Retour à la liste</a>
-        <h1>{{ show.title }}</h1>
+        <a href="{{ path('app_back_country_browse') }}" class="btn btn-primary">Retour à la liste</a>
+        <h1>Ajouter une country</h1>
 
         {{ form_start(form, {"attr": {"novalidate" : "novalidate"}}) }}
         {{ form_row(form) }}
-        <button class="btn btn-primary">Modifier</button>
+        <button class="btn btn-primary">Créer la country</button>
         {{ form_end(form) }}
 
     </div>

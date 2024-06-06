@@ -15,6 +15,11 @@
 - Terminer le TimeConverter ( gérer l'affichage des semaines, gérer les demi minutes)
 - Trouver le moyen de classer automatiquement les acteurs par ordre de creditOrder.
 - Calculer le rating en fonction des Review ( on peut si on le souhaite supprimer le champ en BDD, mais le garder dans l'entité)
+- Gérer les relations lors de la suppression d'un show
+- afficher les flashmessages sur toutes les pages du back
+- gérer les roles dans une entité séparées
+  - attention à corriger les migrations pour ne pas perdre les roles attribués actuellement
+  - il faudra aussi corriger les fixtures
 
 ## Done
 

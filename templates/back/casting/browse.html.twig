@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des castings de {{ show.title }}{% endblock %}
+
+{% block body %}
+    <div class="container-xl bg-light p-5 border-top">
+
+        <h1>Casting du film {{ show.title }}</h1>
+
+        <a href="{{ path('app_back_casting_add', {showId: show.id}) }}" class="btn btn-primary">Ajouter</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Credit order</th>
+                    <th>Role</th>
+                    <th>Acteur</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for currentCasting in castingList %}
+                    <tr>
+                        <td>{{ currentCasting.id }}</td>
+                        <td>{{ currentCasting.creditOrder }}</td>
+                        <td>{{ currentCasting.role }}</td>
+                        <td>{{ currentCasting.actor.displayName }}</td>
+                        <td>
+                            <a href="{{ path('app_back_casting_read', {id: currentCasting.id })}}" class="btn btn-secondary">Détails</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

@@ -21,13 +21,6 @@ class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username', TextType::class, [
-                'label' => 'Ton pseudo',
-                'help' => 'Soit créatif',
-            ])
-            ->add('email', EmailType::class, [
-                'label' => 'Ton email',
-            ])
             ->add('content', TextareaType::class, [
                 'label' => "Ton message",
             ])

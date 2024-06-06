@@ -9,18 +9,82 @@ use App\Entity\Season;
 use App\Entity\Show;
 use App\Entity\Type;
 use App\Entity\Genre;
+use App\Entity\Review;
+use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $hasher;
+
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        // pour utiliser un service dans un autre
+        // on l'injecte par le constructeur
+        // le Conteneur de service se chargera de faire le new pour nous.
+
+        // on stocke alors cet objet dans une propriété
+        // à laquelle on pourra accéder dans notre code
+        $this->hasher = $hasher;
+    }
+    
     public function load(ObjectManager $em): void
     {
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Character($faker));
         $faker->seed(806);
+
+        $clearPassword = 'oflix';
+
+        $userList = [
+            [
+                'email' => 'admin@oflix.fr',
+                'pseudo' => 'admin',
+                'password' => 'oflix',
+                'roles' => ['ROLE_ADMIN'],
+            ],
+            [
+                'email' => 'manager@oflix.fr',
+                'pseudo' => 'manager',
+                'password' => 'oflix',
+                'roles' => ['ROLE_MANAGER'],
+            ],
+            [
+                'email' => 'user@oflix.fr',
+                'pseudo' => 'user',
+                'password' => 'oflix',
+                'roles' => ['ROLE_USER'],
+            ],
+            [
+                'email' => 'julien@oflix.fr',
+                'pseudo' => 'julien',
+                'password' => 'oflix',
+                'roles' => ['ROLE_USER'],
+            ],
+            [
+                'email' => 'virginie@oflix.fr',
+                'pseudo' => 'virginie',
+                'password' => 'oflix',
+                'roles' => ['ROLE_USER'],
+            ],
+        ];
+        $userEntityList = [];
+        foreach($userList as $currentUser)
+        {
+            $newUser = new User();
+            $hashedPassword = $this->hasher->hashPassword($newUser, $currentUser['password']);
+            
+            $newUser->setEmail($currentUser['email']);
+            $newUser->setPassword($hashedPassword);
+            $newUser->setRoles($currentUser['roles']);
+            $newUser->setPseudo($currentUser['pseudo']);
+            $userEntityList[] = $newUser;
+            $em->persist($newUser);
+        }
 
         /***** Actor ******/
         $actorList = [
@@ -332,6 +396,33 @@ class AppFixtures extends Fixture
                 $em->persist($newCasting);
             }
 
+            /***** LIAISON avec Review ******/
+            $reviewCount = $faker->numberBetween(0, 5);
+            for ($reviewIndex = 0; $reviewIndex < $reviewCount; $reviewIndex++)
+            {
+                $newReview = new Review();
+                $newReview->setArtWork($show);
+                $randomUserIndex = $faker->numberBetween(0, count($userEntityList) - 1);
+                $newReview->setUser($userEntityList[$randomUserIndex]);
+                $newReview->setContent($faker->text(50));
+                // on choisit entre 1 et 5 reactions au hasard
+                $reactions = $faker->randomElements(
+                    ['cry', 'laugh', 'think', 'sleep', 'smile'], 
+                    $faker->numberBetween(1, 5)
+                );
+                $newReview->setReactions($reactions);
+                $newReview->setRating($faker->numberBetween(0, 5));
+                /*
+                 * faker ne génère que des objets datetime 
+                 * notre objet attends un objet datetimeImmutable
+                 * on utilise la fonction statique
+                 * DatetimeImmutable::createFromMutable
+                 * pour "convertir" la date en immutable
+                 */
+                $newReview->setWatchedAt(DateTimeImmutable::createFromMutable($faker->dateTimeThisCentury()));
+
+                $em->persist($newReview);
+            }
 
             /***** LIAISON avec Type ******/
             $type = 'Film';

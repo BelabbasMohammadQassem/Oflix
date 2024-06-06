@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Genre;
+use App\Entity\User;
 use App\Repository\GenreRepository;
 use App\Repository\ShowRepository;
 use App\Repository\TypeRepository;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/sandbox', name:"sandbox_")]
@@ -229,4 +231,18 @@ class SandboxController extends AbstractController
         return $this->redirectToRoute('sandbox_session_association_browse');
     }
 
+    #[Route('/hashpassword/{plaintextPassword}', methods: "GET", name:"hashPassword")]
+    public function index(UserPasswordHasherInterface $passwordHasher, $plaintextPassword): Response
+    {
+        // ... e.g. get the user data from a registration form
+        $user = new User();
+
+        // hash the password (based on the security.yaml config for the $user class)
+        $hashedPassword = $passwordHasher->hashPassword(
+            $user,
+            $plaintextPassword
+        );
+
+        return new Response($hashedPassword);
+    }
 }
