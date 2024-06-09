@@ -75,12 +75,15 @@
                 <a href="{{ path('app_show_review_add', {id: show.id}) }}" class="btn btn-primary">Commenter à mon tour</a>
                 {% for currentReview in show.reviews %}
                 <figure class="border p-2 mt-2">
-                    <figcaption>Par {{ currentReview.userName }}</figcaption>
+                    <figcaption>Par {{ currentReview.userName }} - {{ currentReview.rating }} / 5</figcaption>
                     <p>{{ currentReview.content }}</p>
                     {# {% if is_granted('ROLE_ADMIN') or (currentReview.user == app.user) %} #}
                     {% if is_granted('REVIEW_EDIT', currentReview) %}
                     <a class="btn btn-secondary" href="{{ path('app_show_review_edit', {id: currentReview.id}) }}">Modifier</a>
                     {% endif %}
+                    {# todo ajouter les droits : le créateur du commentaire ou un MANAGER peut supprimer une review #}
+                    <a class="btn btn-danger" href="{{ path('app_show_review_delete', {id: currentReview.id}) }}">Supprimer</a>
+
                 </figure>
                 {% endfor %}
             </div>

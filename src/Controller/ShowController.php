@@ -7,6 +7,7 @@ use App\Entity\Show;
 use App\Entity\User;
 use App\Form\ReviewType;
 use App\Repository\ShowRepository;
+use App\Utils\ReviewHelper;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,7 +46,7 @@ class ShowController extends AbstractController
     }
 
     #[Route('/show/{id}/commenter', name: 'app_show_review_add', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
-    public function reviewAdd(EntityManagerInterface $em, Request $request, Show $show): Response
+    public function reviewAdd(EntityManagerInterface $em, Request $request, Show $show, ReviewHelper $reviewHelper): Response
     {
         $review = new Review();
 
@@ -59,8 +60,19 @@ class ShowController extends AbstractController
             $review->setUser($this->getUser());
             $review->setArtWork($show);
 
-            $em->persist($review);
+            // on rajoute la review à la liste du show
+            // car le helper ne va regarder que dans l'objet
+            // or c'est le coté faible de la relation 
+            // donc elle n'y sera pas avant d'avoir fait le flush
+            $show->addReview($review);
 
+            // exécuter le code du ReviewHelper
+            $newRating = $reviewHelper->calculateRatingForShow($show);
+
+            $show->setRating($newRating);
+            
+            $em->persist($review);
+            
             $em->flush();
 
             return $this->redirectToRoute('app_show_read', ["id" => $show->getId() ]);
@@ -73,7 +85,6 @@ class ShowController extends AbstractController
             'form' => $reviewForm,
         ]);
     }
-
 
     #[Route('show/review/{id}/edit', name: 'app_show_review_edit', methods: ['GET', 'POST'], requirements: ['id' => '\d+'])]
     public function reviewEdit(EntityManagerInterface $em, Request $request, Review $review): Response
@@ -97,7 +108,6 @@ class ShowController extends AbstractController
 
         if ($reviewForm->isSubmitted() && $reviewForm->isValid())
         {
-
             $em->flush();
 
             return $this->redirectToRoute('app_show_read', ["id" => $review->getArtWork()->getId() ]);
@@ -107,5 +117,22 @@ class ShowController extends AbstractController
         [
             'form' => $reviewForm,
         ]);
+    }
+
+
+    #[Route('show/review/{id}/delete', name: 'app_show_review_delete', methods: 'GET', requirements: ['id' => '\d+'])]
+    public function reviewDelete(EntityManagerInterface $em, Review $review, ReviewHelper $reviewHelper): Response
+    {
+        $em->remove($review);
+        // on enleve la review du show avant de faire le calcul
+        // car c'est le review le coté fort de la relation
+        $show = $review->getArtWork();
+        $show->removeReview($review);
+        $newRating = $reviewHelper->calculateRatingForShow($show);
+        $show->setRating($newRating);
+
+        $em->flush();
+
+        return $this->redirectToRoute('app_show_read', ['id' => $show->getId()]);
     }
 }

@@ -20,6 +20,7 @@
 - gérer les roles dans une entité séparées
   - attention à corriger les migrations pour ne pas perdre les roles attribués actuellement
   - il faudra aussi corriger les fixtures
+- afficher la liste des étoiles en fonction de la note
 
 ## Done
 

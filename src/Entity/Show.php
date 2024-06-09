@@ -325,5 +325,4 @@ class Show
 
         return $this;
     }
-
 }

@@ -59,7 +59,6 @@ class SandboxController extends AbstractController
     #[Route('/service', methods: "GET", name:"service")]
     public function demoService (Messenger $messenger)
     {
-
         $msg = $messenger->generateMsg();
 
 

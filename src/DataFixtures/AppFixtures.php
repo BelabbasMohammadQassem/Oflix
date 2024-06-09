@@ -311,7 +311,7 @@ class AppFixtures extends Fixture
                 'summary' => 'Les couloirs du temps ',
                 'synopsis' => 'le vieux temps ',
                 'rating' => 5,
-                'type' => 'Film'
+                'type' => `Film`
             ],
             [          
                 'title' => 'Brice de nice',

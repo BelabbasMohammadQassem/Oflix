@@ -58,11 +58,29 @@ ou alors dans le code
   - ou avec un attribut `#[IsGranted('ROLE_ADMIN')]`
 - dans un template avec `is_granted('ROLE_ADMIN')`
 
+### Logique du composant de sécurité
+
+A chaque fois que l'on vérifier les autorisations ( avec `isGranted` ou `denyAccessUnlessGranted`), le composant de sécurité applique cette logique :
+
+1. lister tous les voters de l'application
+   - RoleVoter
+   - ???
+2. pour chaque voter
+   - veux tu voter ( supportsAttribute() )
+   - si oui quel est ton vote ( vote() )
+3. faire le choix
+   - avec l'ensemble des votes on fait un choix
+      - le premier votant a raison
+      - le premier qui dit oui a raison
+      - le premier qui dit non a raison
+      - le plus grand nombre gagne
+      - unanimité des votants
+
 ### Avec des Voters personnalisés
 
 cf [la doc](https://symfony.com/doc/current/security/voters.html#checking-for-roles-inside-a-voter)
 
-Lorsque les règles d'accès sont plus complexes ( en fonction d'un objet ou d'une date ) alors on peut écrire cette logique dans un Voter.
+Lorsque les règles d'accès sont plus complexes ( en fonction d'un objet ou d'une date ) alors on peut écrire cette logique dans un Voter personnalisé.
 
 Un Voter est une classe qui implémente la classe `Component\Security\Core\Authorization\Voter\Voter` de Symfony et doit donc avoir deux méthodes :
 
@@ -74,3 +92,4 @@ Cette logique sera appliquée en utilisant les fonctions suivantes
 - `denyAccessUnlessGranted`
 - `isGranted`
 - et `is_granted` dans `twig`
+

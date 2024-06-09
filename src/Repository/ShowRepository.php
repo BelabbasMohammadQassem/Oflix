@@ -31,7 +31,7 @@ class ShowRepository extends ServiceEntityRepository
             JOIN s.countries c
             WHERE s.rating > :rating'
         );
-        $query->setParameter('rating', 3);
+        $query->setParameter('rating', 0);
 
         // returns an array of Product objects
         return $query->getResult();
