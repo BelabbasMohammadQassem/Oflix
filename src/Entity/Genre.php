@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[Entity(repositoryClass: GenreRepository::class)]
 class Genre
@@ -17,6 +18,7 @@ class Genre
     #[Id]
     #[Column(type: Types::INTEGER)]
     #[GeneratedValue()]
+    #[Groups(['genre_index', 'genre_base'])]
     private $id;
 
     #[Column(length: 140)]
@@ -26,6 +28,7 @@ class Genre
      * @var Collection<int, Show>
      */
     #[ORM\ManyToMany(targetEntity: Show::class, mappedBy: 'genres')]
+    #[Groups(['genre_index', 'genre_base'])]
     private Collection $shows;
 
     public function __construct()

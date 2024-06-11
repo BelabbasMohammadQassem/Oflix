@@ -23,4 +23,15 @@ class ShowController extends AbstractController
         return $this->json($allShows, 200, [], ['groups' => 'show_index']);
         // return $this->json($allShows, 200, [], ['groups' => ['show_base', 'type_join', 'casting_join']]);
     }
+
+    #[Route('/api/v1/show/{id}', name: 'app_api_v1_show')]
+    public function movie(ShowRepository $showRepository): JsonResponse
+    {
+         // préparer les données
+         $allShows = $showRepository->findAll();
+
+         return $this->json($allShows, 200, [], ['groups' => 'show_index', 'show_base']);
+            // 'message' => 'Welcome to your new controller!',
+            // 'path' => 'src/Controller/Api/V1/genreController.php',
+    }   
 }
