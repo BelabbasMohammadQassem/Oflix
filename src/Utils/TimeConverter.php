@@ -2,8 +2,18 @@
 
 namespace App\Utils;
 
-class TimeConverter
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+
+class TimeConverter extends AbstractExtension
 {
+
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('min2hours', [$this, 'convertTime']),
+        ];
+    }
 
     /**
      * converts minutes to string

@@ -2,7 +2,8 @@
 
 ## MCD
 
-```raw:
+```raw
+:
 :
 Genre: genre name
 Season: number, episode count

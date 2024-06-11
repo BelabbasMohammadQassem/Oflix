@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Show;
 use App\Form\ShowType;
 use App\Repository\ShowRepository;
+use App\Utils\AppSlugger;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,7 @@ class ShowController extends AbstractController
     }
 
     #[Route('/{id<\d+>}/update', name: 'edit', methods:['GET', 'POST'])]
-    public function edit(EntityManagerInterface $em, Request $request, Show $show): Response
+    public function edit(AppSlugger $appSlugger, EntityManagerInterface $em, Request $request, Show $show): Response
     {
         $form = $this->createForm(ShowType::class, $show);
 
@@ -47,8 +48,23 @@ class ShowController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $em->flush();
+            // on sluggify le titre du show
+            // le code est dans le service ( la classe ) AppSlugger
+            // on récupère un objet de cette classe
+
+            // on le fait par injection de dépendance, 
+            // cela nous évite d'avoir à fournir les paramètres constructeur
+            // $appSlugger = new AppSlugger('_');
+            // et on slugify le titre
+            $newSlug = $appSlugger->createSlug($show->getTitle());
+
+            // on pense à l'enregistrer dans l'entité
+            // car c'est l'entité qui nous sert de support pour modifier des données dans la BDD
+            $show->setSlug($newSlug);
             $this->addFlash('success', 'Show modifié avec succès');
+            
+            // les modifications sont faites lors du flush
+            $em->flush();
 
             return $this->redirectToRoute('app_back_show_read', ['id' => $show->getId()]);
         }

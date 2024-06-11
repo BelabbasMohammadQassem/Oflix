@@ -17,7 +17,7 @@
                 <tr><th>Id</th><td>{{ show.id }}</td></tr>
                 <tr><th>Type</th><td>{{ show.type.name }}</td></tr>
                 <tr><th>Titre</th><td>{{ show.title }}</td></tr>
-                <tr><th>Durée</th><td>{{ show.duration }}</td></tr>
+                <tr><th>Durée</th><td>{{ show.duration|min2hours }}</td></tr>
                 <tr><th>Synopsis</th><td>{{ show.synopsis }}</td></tr>
                 <tr><th>Résumé</th><td>{{ show.summary }}</td></tr>
                 <tr><th>Image</th><td>{{ show.poster }}</td></tr>

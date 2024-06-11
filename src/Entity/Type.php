@@ -6,6 +6,7 @@ use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TypeRepository::class)]
 class Type
@@ -13,15 +14,18 @@ class Type
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['show_index', 'type_base', 'type_join'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 10)]
+    #[Groups(['show_index', 'type_base', 'type_join'])]
     private ?string $name = null;
 
     /**
      * @var Collection<int, Show>
      */
     #[ORM\OneToMany(targetEntity: Show::class, mappedBy: 'type')]
+    #[Groups(['type_base'])]
     private Collection $shows;
 
     public function __construct()

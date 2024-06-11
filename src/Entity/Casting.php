@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CastingRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CastingRepository::class)]
 class Casting
@@ -11,20 +12,25 @@ class Casting
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['casting_index', 'casting_base', 'casting_join'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['casting_index', 'casting_base', 'casting_join'])]
     private ?string $role = null;
 
     #[ORM\Column]
+    #[Groups(['casting_index', 'casting_base', 'casting_join'])]
     private ?int $creditOrder = null;
 
     #[ORM\ManyToOne(inversedBy: 'castings')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['casting_base'])]
     private ?Actor $actor = null;
 
     #[ORM\ManyToOne(inversedBy: 'castings')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['casting_base'])]
     private ?Show $artWork = null;
 
     public function getId(): ?int

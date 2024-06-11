@@ -16,6 +16,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use JulienDussaut\FakerPizza\PizzaProvider;
 
 class AppFixtures extends Fixture
 {
@@ -36,6 +37,7 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Character($faker));
+        $faker->addProvider(new PizzaProvider($faker));
         $faker->seed(806);
 
         $clearPassword = 'oflix';
@@ -311,7 +313,7 @@ class AppFixtures extends Fixture
                 'summary' => 'Les couloirs du temps ',
                 'synopsis' => 'le vieux temps ',
                 'rating' => 5,
-                'type' => `Film`
+                'type' => 'Film'
             ],
             [          
                 'title' => 'Brice de nice',
@@ -404,7 +406,7 @@ class AppFixtures extends Fixture
                 $newReview->setArtWork($show);
                 $randomUserIndex = $faker->numberBetween(0, count($userEntityList) - 1);
                 $newReview->setUser($userEntityList[$randomUserIndex]);
-                $newReview->setContent($faker->text(50));
+                $newReview->setContent($faker->pizzaName() . $faker->text(50));
                 // on choisit entre 1 et 5 reactions au hasard
                 $reactions = $faker->randomElements(
                     ['cry', 'laugh', 'think', 'sleep', 'smile'], 

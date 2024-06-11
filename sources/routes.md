@@ -33,3 +33,17 @@ Les controllers du back office sont dans un sous dossier back office
 | `/back/country/{id}/edit` | `GET`, `POST`        | `CountryController` | `edit`  | Editer une country | Affiche / traite le formulaire d'édition |
 | `/back/country/add` | `GET`, `POST`        | `CountryController` | `add`  | Ajouter une country | Affiche / traite le formulaire d'ajout |
 | `/back/country/{id}/delete` | `GET`        | `CountryController` | `delete`  | - | Supprime la country |
+
+## API V1
+
+Les controllers de l'API sont dans un sous dossier api
+
+Les URL de l'API vont etre versionné api/V1
+
+| endpoint | Méthode HTTP | Contrôleur       | Méthode | Commentaire    |
+| --- | ------------ | ---------------- | ------- | -------------- |
+| `/api/V1/show/`       | `GET`        | `ShowController` | `browse`    | Liste des shows |
+| `/api/V1/show/`       | `POST`       | `ShowController` | `add`       | Ajoute |
+| `/api/V1/show/{id}`   | `GET`        | `ShowController` | `read`      | Détail d'un show |
+| `/api/V1/show/{id}`   | `PUT`,`PATCH`| `ShowController` | `edit`      | Modification d'un show |
+| `/api/V1/show/{id}`   | `DELETE`     | `ShowController` | `delete`    | Supprime le show et les commentaires associés ( et les casting ? ) |

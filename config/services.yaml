@@ -28,3 +28,6 @@ services:
     App\Utils\ReviewHelper:
         arguments:
             $defaultRating: '%env(resolve:APP_DEFAULT_RATING)%'
+    App\Utils\AppSlugger:
+        arguments:
+            $separator: '%env(resolve:APP_SLUGGER_SEPARATOR)%'

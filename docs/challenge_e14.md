@@ -10,7 +10,7 @@ Voila une liste d'exemple
 |------------------|---------------------------|
 | "" | "" |
 | "ABC" | "abc" |
-| "  ABC " | "abc" |
+| "  ABC " | "abc" | 3 assertio
 | "  A B C " | "a-b-c" |
 | "pizzA Hawaienne" | "pizza-hawaienne" |
 | "pizza\Hawaienne" | "pizza-hawaienne" |

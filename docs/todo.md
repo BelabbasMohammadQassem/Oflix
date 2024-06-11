@@ -12,7 +12,7 @@
 - faire la page de recherche
 - mettre en place une pagination sur la page de liste des films
 - dans les routes, mettre l'url `/film/slug` pour un film ou `/serie/slug` pour une serie
-- Terminer le TimeConverter ( gérer l'affichage des semaines, gérer les demi minutes)
+- Terminer le Timechercher comment faire pour utiliser le TimeConverter dans twig directeeConverter ( gérer l'affichage des semaines, gérer les demi minutes)
 - Trouver le moyen de classer automatiquement les acteurs par ordre de creditOrder.
 - Calculer le rating en fonction des Review ( on peut si on le souhaite supprimer le champ en BDD, mais le garder dans l'entité)
 - Gérer les relations lors de la suppression d'un show
@@ -21,6 +21,7 @@
   - attention à corriger les migrations pour ne pas perdre les roles attribués actuellement
   - il faudra aussi corriger les fixtures
 - afficher la liste des étoiles en fonction de la note
+- coté front, permettre d'accéder à un movie grace à son slug
 
 ## Done
 
