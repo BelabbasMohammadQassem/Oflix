@@ -14,11 +14,11 @@ class Type
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['show_index', 'type_base', 'type_join'])]
+    #[Groups(['show_browse', 'type_base', 'type_join'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 10)]
-    #[Groups(['show_index', 'type_base', 'type_join'])]
+    #[Groups(['show_browse', 'type_base', 'type_join'])]
     private ?string $name = null;
 
     /**

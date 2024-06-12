@@ -18,80 +18,91 @@ class Show
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['show_index', 'show_base', 'show_join'])]
+    #[Groups([
+        'show_base', 'show_join',
+        'show_browse', 
+        'genre_browse'
+    ])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Groups(['show_index', 'show_base', 'show_join'])]
+    #[Groups([
+        'show_base', 'show_join',
+        'show_browse', 
+        'genre_browse'
+    ])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    #[Groups(['show_index', 'show_base', 'show_join'])]
+    #[Groups(['show_browse', 'show_base', 'show_join'])]
     private ?\DateTimeImmutable $releasedAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private ?string $poster = null;
 
     #[ORM\Column(type: Types::SMALLINT, nullable: true)]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private ?int $duration = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private ?string $summary = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private ?string $synopsis = null;
 
     #[ORM\Column]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private ?float $rating = null;
 
     #[ORM\ManyToOne(inversedBy: 'shows')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private ?Type $type = null;
 
     /**
      * @var Collection<int, Season>
      */
     #[ORM\OneToMany(targetEntity: Season::class, mappedBy: 'tvShow')]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private Collection $seasons;
 
     /**
      * @var Collection<int, Country>
      */
     #[ORM\ManyToMany(targetEntity: Country::class, inversedBy: 'shows')]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private Collection $countries;
 
     /**
      * @var Collection<int, Genre>
      */
     #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'shows')]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private Collection $genres;
 
     /**
      * @var Collection<int, Casting>
      */
     #[ORM\OneToMany(targetEntity: Casting::class, mappedBy: 'artWork')]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups([
+        'show_browse', 'show_base',
+        'genre_browse'
+        ])]
     private Collection $castings;
 
     /**
      * @var Collection<int, Review>
      */
     #[ORM\OneToMany(targetEntity: Review::class, mappedBy: 'artWork')]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_base'])]
     private Collection $reviews;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['show_index', 'show_base'])]
+    #[Groups(['show_browse', 'show_base'])]
     private ?string $slug = null;
 
     public function __construct()

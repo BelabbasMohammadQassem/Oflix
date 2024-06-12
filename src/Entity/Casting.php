@@ -12,20 +12,36 @@ class Casting
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['casting_index', 'casting_base', 'casting_join'])]
+    #[Groups([
+        'casting_index', 
+        'casting_base', 
+        'casting_join',
+        'show_browse',
+    ])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    #[Groups(['casting_index', 'casting_base', 'casting_join'])]
+    #[Groups([
+        'casting_index', 
+        'casting_base', 
+        'casting_join', 
+        'genre_browse',
+        'show_browse',
+    ])]
     private ?string $role = null;
 
     #[ORM\Column]
-    #[Groups(['casting_index', 'casting_base', 'casting_join'])]
+    #[Groups([
+        'casting_index', 
+        'casting_base', 
+        'casting_join',
+        'show_browse',
+        ])]
     private ?int $creditOrder = null;
 
     #[ORM\ManyToOne(inversedBy: 'castings')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['casting_base'])]
+    #[Groups(['casting_base', 'genre_browse'])]
     private ?Actor $actor = null;
 
     #[ORM\ManyToOne(inversedBy: 'castings')]

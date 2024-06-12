@@ -1,0 +1,18 @@
+### BROWSE
+GET http://localhost:8000/api/v1/show
+
+### RANDOM SHOW
+GET http://localhost:8000/api/v1/show/random
+
+### READ
+GET http://localhost:8000/api/v1/show/17
+
+### EDIT
+PUT http://localhost:8000/api/v1/show/17
+
+### ADD
+POST http://localhost:8000/api/v1/show
+
+### DELETE
+DELETE http://localhost:8000/api/v1/show/17
+

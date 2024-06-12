@@ -45,5 +45,13 @@ Les URL de l'API vont etre versionné api/V1
 | `/api/V1/show/`       | `GET`        | `ShowController` | `browse`    | Liste des shows |
 | `/api/V1/show/`       | `POST`       | `ShowController` | `add`       | Ajoute |
 | `/api/V1/show/{id}`   | `GET`        | `ShowController` | `read`      | Détail d'un show |
+| `/api/V1/show/random` | `GET`        | `ShowController` | `random`    | Renvoit un film au hasard |
 | `/api/V1/show/{id}`   | `PUT`,`PATCH`| `ShowController` | `edit`      | Modification d'un show |
-| `/api/V1/show/{id}`   | `DELETE`     | `ShowController` | `delete`    | Supprime le show et les commentaires associés ( et les casting ? ) |
+| `/api/V1/show/{id}`   | `DELETE`     | `ShowController` | `delete`    | Supprime le show et les commentaires |
+| `/api/V1/genre/`       | `GET`        | `GenreController` | `browse`    | Liste des genres |
+| `/api/V1/genre/`       | `POST`       | `GenreController` | `add`       | Ajoute |
+| `/api/V1/genre/{id}`   | `GET`        | `GenreController` | `read`      | Détail d'un genre |
+| `/api/V1/genre/{id}`   | `PUT`,`PATCH`| `GenreController` | `edit`      | Modification d'un genre |
+| `/api/V1/genre/{id}`   | `DELETE`     | `GenreController` | `delete`    | Supprime le genre |
+| `/api/V1/genre/{id}/show` | `GET`     | `GenreController` | `showList`  | Liste les show par genre |
+| `/api/V1/review/`      | `POST`       | `ReviewController` | `add`       | Ajoute une review |

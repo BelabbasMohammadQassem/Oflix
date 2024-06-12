@@ -1,0 +1,38 @@
+### BROWSE
+GET http://localhost:8000/api/v1/genre
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MTgxOTY4MTQsImV4cCI6MTcxODIwMDQxNCwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluQG9mbGl4LmZyIn0.H67mfUUqZnPwnBlrkCsgtfGq-0IFYJb9h3vppfRLmQ12iIJ_Bxj2e64J_M3tRpzVj4s1D31VvHcq7HpPlf9hFS8Y5AxvyoMiNd8RVYdFawClAdA9UMo_xfJwGpvAQP53CvcdOQI57UQYvA4YI3EA9N1N9eZLzqbMnl6YMMCu-KT5yWsOK4_debwC-APm2CbBJB9Xu6fU1nI5VrzRvsfVLJdPUr7e0U5-VS0Ussvm-1bX9mtkx979pPquQFRZeJYYli4IGwr__tsn5EqGcjPNusqnb1QI7kcaiKWjfRlotFcPxdYoH_3dBntVTSbY1MMhlnqLlaAZLIW0gc6kbmkYqg
+
+### SHOW BY GENRE
+GET http://localhost:8000/api/v1/genre/15/show
+
+### READ
+GET http://localhost:8000/api/v1/genre/17
+
+### EDIT
+PUT http://localhost:8000/api/v1/genre/33
+Content-Type: application/json
+
+{
+    "name": "update from api"
+}
+
+### ADD OK
+POST http://localhost:8000/api/v1/genre/
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MTgxOTY5OTksImV4cCI6MTcxODIwMDU5OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXNlckBvZmxpeC5mciJ9.PFb1C072PjPr3Si5MkgVy3lr4gB8kTpj1ygvidWYJGBtZuW2FbLGuxs2ao80MGRXkRB0Mg1_UztJc7JMX1e6O0z4GK2jzhAozUdCgNvyWDfizmTi9Q-_dCV9rA7bW_gS-20AnENwa_FoahG3nOOzS47PcEtv5MsAUrRMwJQOJvha3LResgFMeLrzrRFtEobnb4RjIcx7vGC3E1XrPexQNuvuFbzp2eKSNo_0rN0PRbvKLImu1phBOpd_vzkv_GYKYoKBMfAOYFpOQcor0NgSpqxZPRahO7Th71QyD_bA7GFr_PVpr1T7is094-k0Z0mqSLgorBb79A0GS6pTHIOMRg
+
+{
+    "name": "genre from api"
+}
+
+### ADD CONSTRAINT ERROR
+POST http://localhost:8000/api/v1/genre/
+Content-Type: application/json
+
+{
+    "name": "g"
+}
+
+### DELETE
+DELETE http://localhost:8000/api/v1/genre/17
+

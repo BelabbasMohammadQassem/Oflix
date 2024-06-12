@@ -6,11 +6,13 @@ use App\Repository\GenreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Entity(repositoryClass: GenreRepository::class)]
 class Genre
@@ -18,17 +20,27 @@ class Genre
     #[Id]
     #[Column(type: Types::INTEGER)]
     #[GeneratedValue()]
-    #[Groups(['genre_index', 'genre_base'])]
+    #[Groups([
+        'genre_browse',
+        'show_browse',
+    ])]
     private $id;
 
     #[Column(length: 140)]
+    #[Groups([
+        'genre_browse',
+        'show_browse',
+    ])]
+    #[Assert\Length(min: 2)]
     private $name;
 
     /**
      * @var Collection<int, Show>
      */
     #[ORM\ManyToMany(targetEntity: Show::class, mappedBy: 'genres')]
-    #[Groups(['genre_index', 'genre_base'])]
+    #[Groups([
+        'genre_browse',
+    ])]
     private Collection $shows;
 
     public function __construct()

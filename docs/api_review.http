@@ -1,0 +1,41 @@
+### BROWSE
+GET http://localhost:8000/api/v1/review
+
+### SHOW BY review
+GET http://localhost:8000/api/v1/review/15/show
+
+### READ
+GET http://localhost:8000/api/v1/review/17
+
+### EDIT
+PUT http://localhost:8000/api/v1/review/33
+Content-Type: application/json
+
+{
+    "name": "update from api"
+}
+
+### ADD OK
+POST http://localhost:8000/api/v1/review/
+Content-Type: application/json
+
+{
+    "content": "Review From API",
+    "rating": 5,
+    "reactions": ["cry", "think"],
+    "watchedAt": "2024-02-01 14:42",
+    "artWork": 17,
+    "user": 10
+}
+
+### ADD CONSTRAINT ERROR
+POST http://localhost:8000/api/v1/review/
+Content-Type: application/json
+
+{
+    "name": "g"
+}
+
+### DELETE
+DELETE http://localhost:8000/api/v1/review/17
+

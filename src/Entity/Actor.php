@@ -6,6 +6,7 @@ use App\Repository\ActorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: ActorRepository::class)]
 class Actor
@@ -22,9 +23,11 @@ class Actor
     private Collection $castings;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['genre_browse'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 100)]
+    #[Groups(['genre_browse'])]
     private ?string $lastName = null;
 
     public function __construct()

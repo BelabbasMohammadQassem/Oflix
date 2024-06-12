@@ -7,31 +7,35 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/api/v1/show', name: 'app_api_v1_show_')]
 class ShowController extends AbstractController
 {
-    #[Route('/api/v1/show', name: 'app_api_v1_show')]
-    public function index(ShowRepository $showRepository): JsonResponse
+    #[Route('/', name: 'browse')]
+    public function browse(ShowRepository $showRepository): JsonResponse
     {
         // préparer les données
         $allShows = $showRepository->findAll();
 
-        // exemple un groupe de sérialisation par endpoint => show_index 
+        // exemple un groupe de sérialisation par endpoint => show_browse 
         // exemple deux groupes par entités 
         //  show_base, show_join
         //  type_base, type_join
         // renvoyer les données au format json
-        return $this->json($allShows, 200, [], ['groups' => 'show_index']);
+        return $this->json($allShows, 200, [], ['groups' => 'show_browse']);
         // return $this->json($allShows, 200, [], ['groups' => ['show_base', 'type_join', 'casting_join']]);
     }
 
-    #[Route('/api/v1/show/{id}', name: 'app_api_v1_show')]
-    public function movie(ShowRepository $showRepository): JsonResponse
+    #[Route('/random', name: 'random')]
+    public function random(ShowRepository $showRepository): JsonResponse
     {
-         // préparer les données
-         $allShows = $showRepository->findAll();
+        // attention pour récupérer un élément au hasard 
+        // plus il y aura de lignes, plus cette facon de faire sera mauvaise
+        // cf le code de Julien dans le récap e16
+        $allShows = $showRepository->findAll();
+        shuffle($allShows);
 
-         return $this->json($allShows, 200, [], ['groups' => 'show_index', 'show_base']);
-            // 'message' => 'Welcome to your new controller!',
-            // 'path' => 'src/Controller/Api/V1/genreController.php',
-    }   
+        $randomShow = $allShows[0];
+
+        return $this->json($randomShow, 200, [], ['groups' => 'show_browse']);
+    }
 }

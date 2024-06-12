@@ -14,11 +14,11 @@ class Country
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['show_index'])]
+    #[Groups(['show_browse'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 200)]
-    #[Groups(['show_index'])]
+    #[Groups(['show_browse'])]
     private ?string $name = null;
 
     /**
