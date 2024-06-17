@@ -22,12 +22,3 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Sandbox\Messenger:
-        arguments:
-            $language: '%env(resolve:SANDBOX_LANGUAGE)%'
-    App\Utils\ReviewHelper:
-        arguments:
-            $defaultRating: '%env(resolve:APP_DEFAULT_RATING)%'
-    App\Utils\AppSlugger:
-        arguments:
-            $separator: '%env(resolve:APP_SLUGGER_SEPARATOR)%'

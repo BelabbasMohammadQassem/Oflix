@@ -3,9 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Country;
-use App\Entity\Show;
+use App\Entity\Trip;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,11 +17,23 @@ class CountryType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                "label" => "Nom"
+                'label' => 'Nom',
             ])
-            // ->add('shows', EntityType::class, [
-            //     'class' => Show::class,
-            //     'choice_label' => 'title',
+            ->add('coucou', ChoiceType::class, [
+                'multiple' => false,
+                'expanded' => true,
+                'choices' => [
+                    'Salut' => 'fr',
+                    'Hello' => 'en',
+                    'Hola' => 'es',
+                ],
+                'mapped' => false // car on ne veut pas 
+                                    // que le composant formulaire 
+                                    // enregistre cette donnée dans l'entité
+            ])
+            // ->add('trips', EntityType::class, [
+            //     'class' => Trip::class,
+            //     'choice_label' => 'id',
             //     'multiple' => true,
             // ])
         ;

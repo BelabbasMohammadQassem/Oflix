@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SandboxController!{% endblock %}
+
+{% block body %}
+<h1>Liste des country</h1>
+
+<ul>
+    {% for currentCountry in allCountryList %}
+        <li>
+            {{ currentCountry.name }}
+            <ol>
+                {% for currentTrip in currentCountry.trips %}
+                <li>{{ currentTrip.name }}</li>
+                {% endfor %}
+            </ol>
+            <hr>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

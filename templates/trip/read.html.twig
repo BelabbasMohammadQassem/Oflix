@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+      <h1 class="content__title">{{ trip.name }}</h1>
+
+      <section class="segment">
+        <article class="card-solo">
+          <img class="card__image" src="{{ trip.img }}" alt="">
+          <div class="card__tags">
+            {% for currentTag in trip.tags %}
+            <span class="card__tag">{{ currentTag.name }}</span>
+            {% endfor %}
+          </div>
+          <h2 class="card__title">Description</h2>
+          <div class="card__content">
+            <p class="card__desc">{{ trip.description }}</p>
+          </div>
+          <h2 class="card__title">Destination finale</h2>
+            <p>{{ trip.destination }}</p>
+          <h2 class="card__title">Pays traversés</h2>
+          <ul>
+            {% for currentCountry in trip.countries %}
+            <li>{{ currentCountry.name }}</li>
+            {% endfor %}
+          </ul>
+          <h2 class="card__title">Prix</h2>
+          <p>{{ trip.price }} €</p>
+          <h2 class="card__title">Durée</h2>
+          <p>5 jours</p>
+          <h2 class="card__title">Prochain départ</h2>
+          <p>{{ trip.nextDeparture|date('d/m/Y') }}</p>
+          <div class="card__action">
+            <button class="btn btn__like" type="button" aria-label="J'aime"><i class="icon-heart"></i></button>
+            <a class="btn" href="">Je réserve</a>
+          </div>
+        </article>
+
+      </section>
+
+      <section class="segment">
+        <a style="float:right" href="{{ path('app_trip_add_comment', {id: trip.id}) }}" class="btn">Commenter à mon tour</a>
+        <h2 class="segment__title">Derniers commentaires</h2>
+        <div class="filters">
+          <span class="filter">
+            <input type="checkbox" name="rating" value="3" id="rating-3" checked>
+            <label for="rating-3">3 étoiles</label>
+          </span>
+          <span class="filter">
+            <input type="checkbox" name="rating" value="2" id="rating-2" checked>
+            <label for="rating-2">2 étoiles</label>
+          </span>
+          <span class="filter">
+            <input type="checkbox" name="rating" value="1" id="rating-1" checked>
+            <label for="rating-1">1 étoile</label>
+          </span>
+        </div>
+        {% for currentComment in trip.comments %}
+        <article class="review" data-rating="{{ currentComment.rating }}">
+          <h3 class="review__title">{{ currentComment.user.userName }}</h3>
+          <div class="review__stars">
+            {% for i in 1..currentComment.rating %}
+            <i class="icon-star"></i>
+            {% endfor %}
+          </div>
+          <p>{{ currentComment.content }}</p>
+        </article>
+        {% endfor %}
+      </section>
+
+{% endblock %}

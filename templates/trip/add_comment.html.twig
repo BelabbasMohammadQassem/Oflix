@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+      <h1 class="content__title">Promenade dans la nature</h1>
+
+      <section class="segment">
+        <article class="card-solo">
+          {{ form_start(addCommentForm) }}
+          {{ form_row(addCommentForm) }}
+
+          <button class="btn">Commenter</button>
+          {{ form_end(addCommentForm) }}
+        </article>
+
+      </section>
+
+
+{% endblock %}

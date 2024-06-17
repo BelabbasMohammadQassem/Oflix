@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SandboxController!{% endblock %}
+
+{% block body %}
+<h1>Démo form</h1>
+
+{{ form_start(countryForm) }}
+    {{ form_row(countryForm.coucou) }}
+    {{ form_row(countryForm.name) }}
+    <button>Creer</button>
+{{ form_end(countryForm) }}
+{% endblock %}
