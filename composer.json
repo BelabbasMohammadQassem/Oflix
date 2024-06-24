@@ -11,18 +11,25 @@
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.2",
+        "julien-dussaut/faker-pizza": "^2.0",
+        "lexik/jwt-authentication-bundle": "^3.0",
+        "phpdocumentor/reflection-docblock": "^5.4",
+        "phpstan/phpdoc-parser": "^1.29",
         "symfony/apache-pack": "^1.0",
-        "symfony/asset": "7.1.*",
-        "symfony/console": "7.1.*",
-        "symfony/dotenv": "7.1.*",
+        "symfony/asset": "7.*",
+        "symfony/console": "7.*",
+        "symfony/dotenv": "7.*",
         "symfony/flex": "^2",
-        "symfony/form": "7.1.*",
-        "symfony/framework-bundle": "7.1.*",
-        "symfony/runtime": "7.1.*",
-        "symfony/security-bundle": "7.1.*",
-        "symfony/twig-bundle": "7.1.*",
-        "symfony/validator": "7.1.*",
-        "symfony/yaml": "7.1.*",
+        "symfony/form": "7.*",
+        "symfony/framework-bundle": "7.*",
+        "symfony/property-access": "7.*",
+        "symfony/property-info": "7.*",
+        "symfony/runtime": "7.*",
+        "symfony/security-bundle": "7.*",
+        "symfony/serializer": "7.*",
+        "symfony/twig-bundle": "7.*",
+        "symfony/validator": "7.*",
+        "symfony/yaml": "7.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
     },
@@ -51,8 +58,7 @@
         "symfony/polyfill-php73": "*",
         "symfony/polyfill-php74": "*",
         "symfony/polyfill-php80": "*",
-        "symfony/polyfill-php81": "*",
-        "symfony/polyfill-php82": "*"
+        "symfony/polyfill-php81": "*"
     },
     "scripts": {
         "auto-scripts": {
@@ -72,14 +78,20 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.1.*"
+            "require": "7.*"
         }
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.6",
-        "symfony/debug-bundle": "7.1.*",
-        "symfony/maker-bundle": "^1.60",
-        "symfony/stopwatch": "7.1.*",
-        "symfony/web-profiler-bundle": "7.1.*"
+        "fakerphp/faker": "^1.23",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "7.*",
+        "symfony/css-selector": "7.*",
+        "symfony/debug-bundle": "7.*",
+        "symfony/maker-bundle": "^1.59",
+        "symfony/phpunit-bridge": "^7.0",
+        "symfony/stopwatch": "7.*",
+        "symfony/web-profiler-bundle": "7.*",
+        "xylis/faker-cinema-providers": "^2.0"
     }
 }

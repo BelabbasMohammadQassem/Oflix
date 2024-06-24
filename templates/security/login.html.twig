@@ -3,6 +3,8 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+    <div class="container-xl p-5 border-top">
+
     <form method="post">
         {% if error %}
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -29,8 +31,9 @@
             See https://symfony.com/doc/current/security/remember_me.html
 
             <div class="checkbox mb-3">
-                <input type="checkbox" name="_remember_me" id="_remember_me">
-                <label for="_remember_me">Remember me</label>
+                <label>
+                    <input type="checkbox" name="_remember_me"> Remember me
+                </label>
             </div>
         #}
 
@@ -38,4 +41,5 @@
             Sign in
         </button>
     </form>
+    </div>
 {% endblock %}

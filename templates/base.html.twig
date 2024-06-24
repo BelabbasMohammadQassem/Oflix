@@ -1,81 +1,55 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Trip O'dvisor{% endblock %}</title>
-  <link rel="stylesheet" href="{{ asset('css/reset.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/fonts.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-  <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <!-- Our custom CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/oflix.css') }}">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
+    {% block css %}{% endblock %}
+    <title>{% block title %}O'flix{% endblock %}</title>
 </head>
-<body class="">
-  <header class="header">
-    <nav>
-      <div class="header__part">
-        <div class="container">
-          <div class="header__flex">
-            <a class="logo" href="">
-              <img class="logo__image" src="{{ asset('img/logo-theme-green.png') }}" alt="">
-              <span class="logo__title">Trip O'dvisor</span>
-            </a>
-            <div class="menu">
-              <a class="menu__item" href=""><i class="icon-heart"></i> Favoris</a>
-              <a class="menu__item" id="newsletter-button" href=""><i class="icon-mail"></i> Newsletter</a>
-              <a class="menu__item" href=""><i class="icon-check-circle"></i> Avis</a>
-              <button id="theme-switch" class="btn" type="button" aria-label="Changer le thème"><i class="icon-moon"></i></button>
-              <div class="menu__color-switcher">
-                <button id="theme-green" class="theme-button" type="button" aria-label="Changer la couleur du thème"></button>
-                <button id="theme-red" class="theme-button" type="button" aria-label="Changer la couleur du thème"></button>
-                <button id="theme-blue" class="theme-button" title="changer la couleur du thème" type="button" aria-label="Changer la couleur du thème"></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="header__part">
-        <div class="container">
-          <div class="submenu">
-            <a class="submenu__item submenu__item--current" href="index.html">Voyages</a>
-            <a class="submenu__item" href="">Restaurants</a>
-            <a class="submenu__item" href="">Hôtels</a>
-            <a class="submenu__item" href="">Vols</a>
-            <a class="submenu__item" href="">Croisières</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-  </header>
 
-  <main class="container">
-    <div class="content">
+<body>
+    {# si le nom de la route actuelle commence par app_back alors on affiche la nav du back #}
+    {% if app.current_route|slice(0,8) == "app_back"%}
+        {% include '_partials/nav-back.html.twig' %}
+    {% else %}
+        {% include '_partials/nav.html.twig' %}
+    {% endif %}
+    {# lire les informations de la session #}
     {% block body %}{% endblock %}
-    </div>
-  </main>
 
-  <aside class="newsletter">
-    <button class="newsletter__close btn" aria-label="Fermer" type="button">&Cross;</button>
-    <h2 class="newsletter__title">Inscription à la newsletter</h2>
-    <form action="" method="post">
-      <input class="newsletter__field" type="email" required id="subscriber-email" placeholder="user@email.com" aria-label="Votre email">
-      <button class="btn" type="submit">Valider</button>
-    </form>
-  </aside>
 
-  <footer class="footer">
-    <div class="container">
-      <p>Toute ressemblance avec d'autres contenus est purement fortuite.</p>
-    </div>
-  </footer>
+    <!-- footer -->
+    <footer class="container-fluid py-4 border-top text-center">
+        <span class="text-muted">O'flix made with &hearts; at O'clock !
+            <br><small>Thème :<a href="" class="link-secondary text-decoration-none"><i class="bi bi-toggle-on mx-1"></i>Netflix</a></small></a>
+        </span>
+    </footer>
 
-  <!-- juste avant la fermeture du body, on inclut notre script.js -->
-  <script src="{{ asset('js/app.js') }}"></script>
-  <script src="{{ asset('js/messages.js') }}"></script>
-  <script src="{{ asset('js/newsletter.js') }}"></script>
-  <script src="{{ asset('js/slider.js') }}"></script>
-  <script src="{{ asset('js/theme.js') }}"></script>
-  <script src="{{ asset('js/destinations.js') }}"></script>
-  <script src="{{ asset('js/reviews.js') }}"></script>
-  
+    <!-- Optional JavaScript; choose one of 
+        the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    -->
 </body>
+
 </html>

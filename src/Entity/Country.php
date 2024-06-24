@@ -6,6 +6,7 @@ use App\Repository\CountryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CountryRepository::class)]
 class Country
@@ -13,22 +14,29 @@ class Country
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['show_browse'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 200)]
+    #[Groups(['show_browse'])]
     private ?string $name = null;
 
     /**
-     * @var Collection<int, Trip>
+     * @var Collection<int, Show>
      */
-    #[ORM\ManyToMany(targetEntity: Trip::class, mappedBy: 'countries')]
-    private Collection $trips;
+    #[ORM\ManyToMany(targetEntity: Show::class, mappedBy: 'countries')]
+    private Collection $shows;
 
     public function __construct()
     {
-        $this->trips = new ArrayCollection();
+        $this->shows = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -47,27 +55,27 @@ class Country
     }
 
     /**
-     * @return Collection<int, Trip>
+     * @return Collection<int, Show>
      */
-    public function getTrips(): Collection
+    public function getShows(): Collection
     {
-        return $this->trips;
+        return $this->shows;
     }
 
-    public function addTrip(Trip $trip): static
+    public function addShow(Show $show): static
     {
-        if (!$this->trips->contains($trip)) {
-            $this->trips->add($trip);
-            $trip->addCountry($this);
+        if (!$this->shows->contains($show)) {
+            $this->shows->add($show);
+            $show->addCountry($this);
         }
 
         return $this;
     }
 
-    public function removeTrip(Trip $trip): static
+    public function removeShow(Show $show): static
     {
-        if ($this->trips->removeElement($trip)) {
-            $trip->removeCountry($this);
+        if ($this->shows->removeElement($show)) {
+            $show->removeCountry($this);
         }
 
         return $this;

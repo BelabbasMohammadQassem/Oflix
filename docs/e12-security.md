@@ -22,7 +22,7 @@ cf [la doc](https://symfony.com/doc/current/security.html)
 
 ```bash
 # installation du composant
-composer require symfony/security-bundle
+composer require security
 # création de l'entité User qui sera utilisée par le composant de sécurité
 # cette entité est modifiable par la suite avec le make:entity
 php bin/console make:user

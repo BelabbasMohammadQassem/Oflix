@@ -153,36 +153,4 @@ class GenreController extends AbstractController
         // ];
         return $this->json($genre->getShows(), 200, [], ["groups" => "show_browse"]);
     }
-
-    #[Route('/show/delete/{id}/', name: 'show', requirements: ["id" => "\d+"], methods: "DELETE")]
-    public function showDelete($id, GenreRepository $genreRepo,  EntityManagerInterface $em): JsonResponse
-    {
-        // Preparer la donnée
-        $genreDelete = $genreRepo->find($id);
-
-        // envoi d'une erreur si erreur
-        if (is_null($genreDelete))
-        {
-            $info = [
-                'success' => false,
-                'error_message' => 'genre non trouvé',
-                'error_code' => 'genre_not_found',
-            ];
-
-            // renvoyer la donnée sous format json
-            return $this->json($info, Response::HTTP_NOT_FOUND);
-        }
-
-           // 3. faire le traitement des données
-        // ici insérer le genre en BDD
-        $em->remove($genreDelete);
-        $em->flush();
-
-        return $this->json([
-            'success' => true,
-            'message' => 'genre supprimé avec succès'
-        ], Response::HTTP_OK);
-    
-        
-    }
 }
