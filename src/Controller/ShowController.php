@@ -30,6 +30,7 @@ class ShowController extends AbstractController
         // 2. affichage de la vue
         return $this->render('show/browse.html.twig', [
             'showList' => $allShows
+            
         ]);
     }
 

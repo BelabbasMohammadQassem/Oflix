@@ -17,12 +17,18 @@ use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use JulienDussaut\FakerPizza\PizzaProvider;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 class AppFixtures extends Fixture
 {
-    private $hasher;
 
-    public function __construct(UserPasswordHasherInterface $hasher)
+    
+    private $hasher;
+    private $slugger;
+
+
+    public function __construct(UserPasswordHasherInterface $hasher, SluggerInterface $slugger)
     {
         // pour utiliser un service dans un autre
         // on l'injecte par le constructeur
@@ -31,6 +37,8 @@ class AppFixtures extends Fixture
         // on stocke alors cet objet dans une propriété
         // à laquelle on pourra accéder dans notre code
         $this->hasher = $hasher;
+        $this->slugger = $slugger;
+
     }
     
     public function load(ObjectManager $em): void
@@ -359,6 +367,9 @@ class AppFixtures extends Fixture
         {
             $show = new Show();
             $show->setTitle($currentShowInfo['title']);
+            $slug = $this->slugger->slug(strtolower($currentShowInfo['title']));
+            $show->setSlug($slug);
+            
             $show->setReleasedAt(new DateTimeImmutable($currentShowInfo['releasedAt']));
             $show->setPoster($currentShowInfo['poster']);
             $show->setDuration($currentShowInfo['duration']);
@@ -457,4 +468,6 @@ class AppFixtures extends Fixture
 
         $em->flush();
     }
+
+    
 }

@@ -21,12 +21,14 @@ html {
   --color-main: var(--theme-green-main);
   --color-alt: var(--theme-green-alt);
   --border-normal: 1px solid rgba(0, 0, 0, .2);
-  --color-bg: white;
+  --color-bg: white; /* Assurez-vous que cette couleur est celle souhaitée */
   --color-opacity: rgba(0, 0, 0, .1);
 }
 
 body {
   font-family: 'Noto Sans', sans-serif;
+  background-color: white !important; /* Forcer le fond à blanc */
+
   transition: background-color .3s;
 }
 

@@ -34,6 +34,8 @@ class Show
     ])]
     private ?string $title = null;
 
+    
+
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
     #[Groups(['show_browse', 'show_base', 'show_join'])]
     private ?\DateTimeImmutable $releasedAt = null;
