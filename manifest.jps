@@ -1,0 +1,24 @@
+type: install
+name: frankensf
+id: frankensf
+categories: ["apps/dev-and-admin-tools"]
+logo: https://symfony.com/logos/symfony_black_03.png
+
+description: |
+  Fichier d'Infrastructure As Code pour déployer l'application frankensf sur Hidora.
+  
+ssl: true
+
+nodes:
+  - image: qassem1/oflix_frankensf:latest
+    count: 1
+    cloudlets: 8
+    fixedCloudlets: 1
+    nodeGroup: cp
+    displayName: FrontWeb
+    volumes:
+      - /var/www
+
+
+success: |
+  Votre Application a été déployée sur Hidora avec succès !
