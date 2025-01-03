@@ -27,4 +27,4 @@ import-external-repo.sh
 
 # Ignore .env file
 .env
-echo ".env" >> .gitignore
+echo ".env" >> .gitignoregit push --force origin main
